@@ -16,6 +16,22 @@ class App extends Component {
       citas 
     });//reeinscribe la propiedad del state, no borra la cita anterior, sino que hace una copia como vemos arriba y agrega otra.
   }
+
+  borrarCita= id=>{
+    console.log(id);
+    //leer el state
+    //obtener copia del state
+    const CitasActuales = [...this.state.citas];
+
+    //borrar el elemento del state
+    
+    const citasResultado = CitasActuales.filter(cita=>cita.id !== id);
+    //actualizar el state
+
+    this.setState({
+      citas: citasResultado
+    })
+  }
   render() {
     return (
       <div className="container">
@@ -25,7 +41,7 @@ class App extends Component {
           <AgregarCita crearCita={this.crearCita}/>
         </div>
         <div className="col-md-6">
-          <ListaCitas citas={this.state.citas}/>
+          <ListaCitas citas={this.state.citas} borrarCita={this.borrarCita}/>
         </div>
         </div>
       </div>

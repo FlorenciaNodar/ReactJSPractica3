@@ -15,6 +15,7 @@ class ListaCitas extends Component {
                    {Object.keys(this.props.citas).map(cita=>(
                         <Cita key={cita}
                               info={this.props.citas[cita]}
+                              borrarCita={this.props.borrarCita}
                         />
                    ))}
                 </div>
