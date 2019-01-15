@@ -3,9 +3,17 @@ import Header from './componentes/Header';
 import AgregarCita from './componentes/AgregarCita';
 class App extends Component {
 
-  crearCita=(e)=>{
-    
-    console.log(e);
+  state = {
+    citas:[]
+  }
+  crearCita=(nuevaCita)=>{
+    const citas = [...this.state.citas,nuevaCita]
+
+    console.log(citas);
+
+    this.setState({
+      citas 
+    });//reeinscribe la propiedad del state, no borra la cita anterior, sino que hace una copia como vemos arriba y agrega otra.
   }
   render() {
     return (
