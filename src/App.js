@@ -3,8 +3,9 @@ import Header from './componentes/Header';
 import AgregarCita from './componentes/AgregarCita';
 class App extends Component {
 
-  crearCita=()=>{
-    console.log("desde app.js");
+  crearCita=(e)=>{
+    
+    console.log(e);
   }
   render() {
     return (
