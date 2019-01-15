@@ -9,7 +9,7 @@ class AgregarCita extends Component {
     horaRef=React.createRef();
     sintomasRef=React.createRef();
 
-    state = {  }
+    state = { error: false }
     crearNuevaCita=(e)=>{
         e.preventDefault();
 
@@ -19,21 +19,34 @@ class AgregarCita extends Component {
               hora=this.horaRef.current.value,
               sintomas=this.sintomasRef.current.value;
 
-        const objectNuevaCita = {
-            id: uuid(),
-            mascota: mascota,
-            propietario: propietario,
-            fecha: fecha,
-            hora: hora,
-            sintomas:sintomas
-        }
-            //se envia el objeto hacia el padre para actualizar el state
-        this.props.crearCita(objectNuevaCita);
+        if(mascota === '' ||propietario === '' ||fecha === '' ||hora === '' ||sintomas === ''){
+            this.setState({
+                error:true
+            })
+        }else{
+            const objectNuevaCita = {
+                id: uuid(),
+                mascota: mascota,
+                propietario: propietario,
+                fecha: fecha,
+                hora: hora,
+                sintomas:sintomas
+            }
+                //se envia el objeto hacia el padre para actualizar el state
+            this.props.crearCita(objectNuevaCita);
+    
+            //reiniciar el formulario
+            e.currentTarget.reset();
 
-        //reiniciar el formulario
-        e.currentTarget.reset();
+            //elimine el error
+            this.setState({
+                error:false
+            })
+        }
+        
     }
     render() { 
+        const existeError = this.state.error;
         return (  
             <div className="card mt-5">
                 <div className="card-body">
@@ -76,6 +89,7 @@ class AgregarCita extends Component {
                             </div>
                         </div>
                     </form>
+                    {existeError? <div className="alert alert-danger text-center">Todos los campos son obligatorios</div> : ''}
                  </div>
             </div>
         );
