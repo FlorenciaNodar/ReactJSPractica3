@@ -7,6 +7,21 @@ class App extends Component {
   state = {
     citas:[]
   }
+
+  componentDidMount(){
+    const citasLS = JSON.parse(localStorage.getItem('citas'));
+    if(citasLS){
+      this.setState({
+        citas: citasLS
+      })
+    }
+
+  }
+
+  componentDidUpdate(){
+    const citasLS = localStorage.setItem('citas', JSON.stringify(this.state.citas));
+  }
+
   crearCita=(nuevaCita)=>{
     const citas = [...this.state.citas,nuevaCita]
 
